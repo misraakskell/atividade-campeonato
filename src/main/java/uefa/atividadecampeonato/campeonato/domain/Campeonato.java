@@ -1,16 +1,14 @@
 package uefa.atividadecampeonato.campeonato.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uefa.atividadecampeonato.jogos.domain.Jogos;
-import uefa.atividadecampeonato.tabela.domain.Tabela;
-import uefa.atividadecampeonato.times.domain.Times;
 
-import java.util.List;
 
 @Entity
 @Data
@@ -18,26 +16,33 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Campeonato {
-
-    private int ano;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCamp;
 
+    @Column(name = "Ano")
+    @NotNull
+    private int ano;
+
+    @NotEmpty(message = "O campeonato precisa de um nome")
+    @Column(name = "Nome")
     private String nome;
-    private boolean status;
+
+    @Column(name = "Status")
+    private boolean status; //se não finalizado
+
+    @Column(name = "Oficial")
     private boolean oficial; //se não amistoso
 
-    @OneToMany
-    @JoinColumn(name = "ID_TIMES")
-    private List<Times> times;
+//    @OneToMany
+//    @JoinColumn(name = "ID_TIMES")
+//    private List<Times> times;
+//
+//    @OneToMany
+//    @JoinColumn(name = "ID_JOGOS", nullable = false)
+//    private Jogos jogos;
 
-    @OneToMany
-    @JoinColumn(name = "ID_JOGOS", nullable = false)
-    private List<Jogos> jogos;
-
-    @OneToOne
-    @JoinColumn(name = "ID_TABELA")
-    private Tabela tabela;
+//    @OneToOne
+//    @JoinColumn(name = "ID_TABELA")
+//    private Tabela tabela;
 }

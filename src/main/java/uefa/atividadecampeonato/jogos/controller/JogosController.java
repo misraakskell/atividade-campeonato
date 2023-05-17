@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("campeonato")
+@RequestMapping("jogos")
 @Log4j2
 @RequiredArgsConstructor
 public class JogosController {

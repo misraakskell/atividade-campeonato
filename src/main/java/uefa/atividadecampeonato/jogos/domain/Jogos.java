@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import uefa.atividadecampeonato.campeonato.domain.Campeonato;
-import uefa.atividadecampeonato.tabela.domain.Tabela;
+import uefa.atividadecampeonato.times.domain.Times;
 
 @Data
 @AllArgsConstructor
@@ -19,14 +19,30 @@ public class Jogos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idJogo;
 
-    private int timeMandante;
-    private int timeVisitante;
-    private int golsMandante;
-    private int golsVisitante;
-    private int campeonato;
+    @ManyToOne
+    @JoinColumn(name = "ID_MANDANTE")
+    private Times timeMandante;
 
     @ManyToOne
-    @JoinColumn(name = "ID-TABELA", nullable = false)
-    private Tabela tabela;
+    @JoinColumn(name = "ID_VISITANTE")
+    private Times timeVisitante;
+
+    @ManyToOne
+    @JoinColumn(name = "ID_CAMPEONATO")
+    private Campeonato campeonato;
+
+    @Column(name = "Placar casa")
+    private Integer golsMandante;
+
+    @Column(name = "Placar visita")
+    private Integer golsVisitante;
+
+    //    {
+//        "timeMandante": "Fortaleza FC",
+//            "timeVisitante": "Paysandu SC",
+//            "Campeonato": "Campeonato Brasileiro",
+//            "golsMandante": 3,
+//            "golsVisitante": 2
+//    }
 
 }

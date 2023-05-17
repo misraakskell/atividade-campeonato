@@ -42,10 +42,18 @@ public class CampeonatoController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping
+    @PutMapping(path = " /{id}")
     public ResponseEntity<Void> replace(@RequestBody CampeonatoPutRequestBody campeonatoPutRequestBody) {
         campeonatoService.replace(campeonatoPutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+//    {
+//        "idCamp": 2,
+//            "ano": 2018,
+//            "nome": "Campeonato Brasileiro",
+//            "status": true,
+//            "oficial": true
+//    }
 
 }

@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uefa.atividadecampeonato.campeonato.domain.Campeonato;
-import uefa.atividadecampeonato.tabela.domain.Tabela;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -22,11 +20,12 @@ public class Times {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idTime;
 
+    @NotEmpty(message = "O time precisa de um nome")
+    @Column(name = "Nome")
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_TIMES", nullable = false)
-    private Tabela tabela;
-
+//    @ManyToOne
+//    @JoinColumn(name = "ID_TIMES", nullable = false)
+//    private Tabela tabela;
 
 }
