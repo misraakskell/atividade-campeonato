@@ -42,4 +42,6 @@ public class JogosService {
         savedJogos.setCampeonato(jogosPutRequestBody.getCampeonato());
         jogosRepository.save(savedJogos);
     }
+
+    //alteração
 }
