@@ -32,8 +32,8 @@ public class TimesController {
     }
 
     @PostMapping
-    public ResponseEntity<Times> save(@RequestBody @Valid TimesPostRequestBody timesPostRequestBody) {
-        return new ResponseEntity<>(timesService.save(timesPostRequestBody), HttpStatus.CREATED);
+    public ResponseEntity<Times> save(@RequestBody @Valid Times times) {
+        return new ResponseEntity<>(timesService.save(times), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -42,7 +42,7 @@ public class TimesController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping
+    @PutMapping(path = "/{id}")
     public ResponseEntity<Void> replace(@RequestBody TimesPutRequestBody timesPutRequestBody) {
         timesService.replace(timesPutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

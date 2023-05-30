@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class TimesPostRequestBody {
-    private String nomeTime;
+
+    private String nome;
 }

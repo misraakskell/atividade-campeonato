@@ -21,11 +21,11 @@ public class Tabela {
     private int idTabela;
 
     @ManyToOne
-    @JoinColumn(name = "ID_CAMPEONATO")
+    @JoinColumn
     private Campeonato campeonato;
 
     @ManyToOne
-    @JoinColumn(name = "ID_TIME")
+    @JoinColumn
     private Times times;
 
     @Column(name = "Pontuação")
@@ -37,10 +37,10 @@ public class Tabela {
     @Column(name = "Derrotas")
     private int qntdDeDerrotas;
 
-    @Column(name = "Gols feitos")
+    @Column(name = "Gols_feitos")
     private int qntdDeGolsFeitos;
 
-    @Column(name = "Gols sofridos")
+    @Column(name = "Gols_sofridos")
     private int qntdDeGolsSofridos;
 
 }

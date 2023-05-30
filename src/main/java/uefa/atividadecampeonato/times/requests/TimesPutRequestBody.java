@@ -7,5 +7,5 @@ import lombok.Data;
 @Builder
 public class TimesPutRequestBody {
     private int idTime;
-    private String nomeTime;
+    private String nome;
 }

@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uefa.atividadecampeonato.campeonato.domain.Campeonato;
-import uefa.atividadecampeonato.campeonato.requests.CampeonatoPostRequestBody;
 import uefa.atividadecampeonato.campeonato.requests.CampeonatoPutRequestBody;
 import uefa.atividadecampeonato.campeonato.service.CampeonatoService;
 
@@ -32,8 +31,8 @@ public class CampeonatoController {
     }
 
     @PostMapping
-    public ResponseEntity<Campeonato> save(@RequestBody @Valid CampeonatoPostRequestBody campeonatoPostRequestBody) {
-        return new ResponseEntity<>(campeonatoService.save(campeonatoPostRequestBody), HttpStatus.CREATED);
+    public ResponseEntity<Campeonato> save(@RequestBody @Valid Campeonato campeonato) {
+        return new ResponseEntity<>(campeonatoService.save(campeonato), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -42,18 +41,10 @@ public class CampeonatoController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping(path = " /{id}")
+    @PutMapping(path = "/{id}")
     public ResponseEntity<Void> replace(@RequestBody CampeonatoPutRequestBody campeonatoPutRequestBody) {
         campeonatoService.replace(campeonatoPutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-//    {
-//        "idCamp": 2,
-//            "ano": 2018,
-//            "nome": "Campeonato Brasileiro",
-//            "status": true,
-//            "oficial": true
-//    }
 
 }

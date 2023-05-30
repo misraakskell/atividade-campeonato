@@ -10,11 +10,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@Entity
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Builder
 public class Campeonato {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,24 +25,10 @@ public class Campeonato {
     private int ano;
 
     @NotEmpty(message = "O campeonato precisa de um nome")
-    @Column(name = "Nome")
     private String nome;
 
-    @Column(name = "Status")
     private boolean status; //se não finalizado
 
-    @Column(name = "Oficial")
     private boolean oficial; //se não amistoso
 
-//    @OneToMany
-//    @JoinColumn(name = "ID_TIMES")
-//    private List<Times> times;
-//
-//    @OneToMany
-//    @JoinColumn(name = "ID_JOGOS", nullable = false)
-//    private Jogos jogos;
-
-//    @OneToOne
-//    @JoinColumn(name = "ID_TABELA")
-//    private Tabela tabela;
 }

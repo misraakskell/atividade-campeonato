@@ -3,9 +3,7 @@ package uefa.atividadecampeonato.campeonato.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uefa.atividadecampeonato.campeonato.domain.Campeonato;
-import uefa.atividadecampeonato.campeonato.mapper.CampeonatoMapper;
 import uefa.atividadecampeonato.campeonato.repository.CampeonatoRepository;
-import uefa.atividadecampeonato.campeonato.requests.CampeonatoPostRequestBody;
 import uefa.atividadecampeonato.campeonato.requests.CampeonatoPutRequestBody;
 import uefa.atividadecampeonato.exception.BadRequestException;
 
@@ -26,8 +24,8 @@ public class CampeonatoService {
                 .orElseThrow(() -> new BadRequestException("Campeonato not found"));
     }
 
-    public Campeonato save(CampeonatoPostRequestBody campeonatoPostRequestBody) {
-        return campeonatoRepository.save(CampeonatoMapper.INSTANCE.toCampeonato(campeonatoPostRequestBody));
+    public Campeonato save(Campeonato campeonato) {
+        return campeonatoRepository.save(campeonato);
     }
 
     public void delete(int id) {
@@ -36,8 +34,11 @@ public class CampeonatoService {
 
     public void replace(CampeonatoPutRequestBody campeonatoPutRequestBody) {
         Campeonato savedCampeonato = findByIdOrThrowBadRequestException(campeonatoPutRequestBody.getIdCamp());
-        Campeonato campeonato = CampeonatoMapper.INSTANCE.toCampeonato(campeonatoPutRequestBody);
-        campeonato.setIdCamp(savedCampeonato.getIdCamp());
-        campeonatoRepository.save(campeonato);
+        savedCampeonato.setIdCamp(campeonatoPutRequestBody.getIdCamp());
+        savedCampeonato.setNome(campeonatoPutRequestBody.getNome());
+        savedCampeonato.setAno(campeonatoPutRequestBody.getAno());
+        savedCampeonato.setStatus(campeonatoPutRequestBody.isStatus());
+        savedCampeonato.setOficial(campeonatoPutRequestBody.isOficial());
+        campeonatoRepository.save(savedCampeonato);
     }
 }

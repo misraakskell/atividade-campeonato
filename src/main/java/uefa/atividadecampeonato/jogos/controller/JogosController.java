@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uefa.atividadecampeonato.jogos.domain.Jogos;
-import uefa.atividadecampeonato.jogos.requests.JogosPostRequestBody;
 import uefa.atividadecampeonato.jogos.requests.JogosPutRequestBody;
 import uefa.atividadecampeonato.jogos.service.JogosService;
 
@@ -32,8 +31,8 @@ public class JogosController {
     }
 
     @PostMapping
-    public ResponseEntity<Jogos> save(@RequestBody @Valid JogosPostRequestBody jogosPostRequestBody) {
-        return new ResponseEntity<>(jogosService.save(jogosPostRequestBody), HttpStatus.CREATED);
+    public ResponseEntity<Jogos> save(@RequestBody @Valid Jogos jogos) {
+        return new ResponseEntity<>(jogosService.save(jogos), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -42,7 +41,7 @@ public class JogosController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping
+    @PutMapping(path = "/{id}")
     public ResponseEntity<Void> replace(@RequestBody JogosPutRequestBody jogosPutRequestBody) {
         jogosService.replace(jogosPutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

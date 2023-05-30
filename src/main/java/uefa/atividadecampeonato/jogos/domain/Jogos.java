@@ -31,18 +31,10 @@ public class Jogos {
     @JoinColumn(name = "ID_CAMPEONATO")
     private Campeonato campeonato;
 
-    @Column(name = "Placar casa")
-    private Integer golsMandante;
+    @Column(name = "Gols_mandante")
+    private int golsMandante;
 
-    @Column(name = "Placar visita")
-    private Integer golsVisitante;
-
-    //    {
-//        "timeMandante": "Fortaleza FC",
-//            "timeVisitante": "Paysandu SC",
-//            "Campeonato": "Campeonato Brasileiro",
-//            "golsMandante": 3,
-//            "golsVisitante": 2
-//    }
+    @Column(name = "Gols_visitante")
+    private int golsVisitante;
 
 }

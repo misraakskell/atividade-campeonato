@@ -4,9 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uefa.atividadecampeonato.exception.BadRequestException;
 import uefa.atividadecampeonato.jogos.domain.Jogos;
-import uefa.atividadecampeonato.jogos.mapper.JogosMapper;
 import uefa.atividadecampeonato.jogos.repository.JogosRepository;
-import uefa.atividadecampeonato.jogos.requests.JogosPostRequestBody;
 import uefa.atividadecampeonato.jogos.requests.JogosPutRequestBody;
 
 import java.util.List;
@@ -26,8 +24,8 @@ public class JogosService {
                 .orElseThrow(() -> new BadRequestException("Jogo not found"));
     }
 
-    public Jogos save(JogosPostRequestBody jogosPostRequestBody) {
-        return jogosRepository.save(JogosMapper.INSTANCE.toJogos(jogosPostRequestBody));
+    public Jogos save(Jogos jogos) {
+        return jogosRepository.save(jogos);
     }
 
     public void delete(int id) {
@@ -36,8 +34,12 @@ public class JogosService {
 
     public void replace(JogosPutRequestBody jogosPutRequestBody) {
         Jogos savedJogos = findByIdOrThrowBadRequestException(jogosPutRequestBody.getIdJogo());
-        Jogos jogos = JogosMapper.INSTANCE.toJogos(jogosPutRequestBody);
-        jogos.setIdJogo(savedJogos.getIdJogo());
-        jogosRepository.save(jogos);
+        savedJogos.setIdJogo(jogosPutRequestBody.getIdJogo());
+        savedJogos.setTimeMandante(jogosPutRequestBody.getTimeMandante());
+        savedJogos.setTimeVisitante(jogosPutRequestBody.getTimeVisitante());
+        savedJogos.setGolsMandante(jogosPutRequestBody.getGolsMandante());
+        savedJogos.setGolsVisitante(jogosPutRequestBody.getGolsVisitante());
+        savedJogos.setCampeonato(jogosPutRequestBody.getCampeonato());
+        jogosRepository.save(savedJogos);
     }
 }

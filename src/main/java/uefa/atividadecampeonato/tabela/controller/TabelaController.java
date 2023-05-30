@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uefa.atividadecampeonato.tabela.domain.Tabela;
-import uefa.atividadecampeonato.tabela.requests.TabelaPostRequestBody;
 import uefa.atividadecampeonato.tabela.requests.TabelaPutRequestBody;
 import uefa.atividadecampeonato.tabela.service.TabelaService;
 
@@ -32,8 +31,8 @@ public class TabelaController {
     }
 
     @PostMapping
-    public ResponseEntity<Tabela> save(@RequestBody @Valid TabelaPostRequestBody tabelaPostRequestBody) {
-        return new ResponseEntity<>(tabelaService.save(tabelaPostRequestBody), HttpStatus.CREATED);
+    public ResponseEntity<Tabela> save(@RequestBody @Valid Tabela tabela) {
+        return new ResponseEntity<>(tabelaService.save(tabela), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -42,7 +41,7 @@ public class TabelaController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping
+    @PutMapping(path = "/{id}")
     public ResponseEntity<Void> replace(@RequestBody TabelaPutRequestBody tabelaPutRequestBody) {
         tabelaService.replace(tabelaPutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
