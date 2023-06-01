@@ -27,20 +27,10 @@ public class Tabela {
     @ManyToOne
     @JoinColumn
     private Times times;
-
-    @Column(name = "Pontuação")
-    private int pontuacao;
-
-    @Column(name = "Vitórias")
-    private int qntdDeVitorias;
-
-    @Column(name = "Derrotas")
-    private int qntdDeDerrotas;
-
-    @Column(name = "Gols_feitos")
-    private int qntdDeGolsFeitos;
-
-    @Column(name = "Gols_sofridos")
-    private int qntdDeGolsSofridos;
+    private long pontuacao;
+    private long qntdDeVitorias;
+    private long qntdDeDerrotas;
+    private long qntdDeGolsFeitos;
+    private long qntdDeGolsSofridos;
 
 }

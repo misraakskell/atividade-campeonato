@@ -20,15 +20,14 @@ public class Campeonato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCamp;
 
-    @Column(name = "Ano")
     @NotNull
-    private int ano;
+    private long ano;
 
     @NotEmpty(message = "O campeonato precisa de um nome")
     private String nome;
 
-    private boolean status; //se não finalizado
+    private boolean iniciado; //se não finalizado
 
-    private boolean oficial; //se não amistoso
+    private boolean finalizado; //se não amistoso
 
 }

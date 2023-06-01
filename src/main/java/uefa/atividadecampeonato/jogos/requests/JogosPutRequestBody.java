@@ -12,6 +12,6 @@ public class JogosPutRequestBody {
     private Times timeMandante;
     private Times timeVisitante;
     private Campeonato campeonato;
-    private int golsMandante;
-    private int golsVisitante;
+    private long golsMandante;
+    private long golsVisitante;
 }

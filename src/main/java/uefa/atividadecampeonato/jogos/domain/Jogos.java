@@ -31,10 +31,7 @@ public class Jogos {
     @JoinColumn(name = "ID_CAMPEONATO")
     private Campeonato campeonato;
 
-    @Column(name = "Gols_mandante")
-    private int golsMandante;
-
-    @Column(name = "Gols_visitante")
-    private int golsVisitante;
+    private long golsMandante;
+    private long golsVisitante;
 
 }

@@ -11,6 +11,7 @@ import uefa.atividadecampeonato.campeonato.service.CampeonatoService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("campeonato")
@@ -47,4 +48,15 @@ public class CampeonatoController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @PutMapping(path = "/{id}/inicia")
+    public ResponseEntity<Objects> iniciaCamp(@PathVariable("id") int id, @RequestBody Campeonato campeonato) {
+        campeonatoService.inicia(campeonato);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping(path = "/{id}/finaliza")
+    public ResponseEntity<Objects> finalizaCamp(@PathVariable("id") int id) {
+        campeonatoService.finaliza(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

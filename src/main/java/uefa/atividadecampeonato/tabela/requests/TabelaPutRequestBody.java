@@ -11,9 +11,9 @@ public class TabelaPutRequestBody {
     private int idTabela;
     private Campeonato campeonato;
     private Times times;
-    private int pontuacao;
-    private int qntdDeVitorias;
-    private int qntdDeDerrotas;
-    private int qntdDeGolsFeitos;
-    private int qntdDeGolsSofridos;
+    private long pontuacao;
+    private long qntdDeVitorias;
+    private long qntdDeDerrotas;
+    private long qntdDeGolsFeitos;
+    private long qntdDeGolsSofridos;
 }

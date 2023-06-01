@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uefa.atividadecampeonato.times.domain.Times;
-import uefa.atividadecampeonato.times.requests.TimesPostRequestBody;
 import uefa.atividadecampeonato.times.requests.TimesPutRequestBody;
 import uefa.atividadecampeonato.times.service.TimesService;
 

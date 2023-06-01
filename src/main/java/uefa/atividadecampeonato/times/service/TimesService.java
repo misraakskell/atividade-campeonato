@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import uefa.atividadecampeonato.exception.BadRequestException;
 import uefa.atividadecampeonato.times.domain.Times;
 import uefa.atividadecampeonato.times.repository.TimesRepository;
-import uefa.atividadecampeonato.times.requests.TimesPostRequestBody;
 import uefa.atividadecampeonato.times.requests.TimesPutRequestBody;
 
 import java.util.List;
