@@ -1,7 +1,9 @@
 package uefa.atividadecampeonato.times.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import uefa.atividadecampeonato.exception.BadRequestException;
 import uefa.atividadecampeonato.times.domain.Times;
 import uefa.atividadecampeonato.times.repository.TimesRepository;
@@ -40,5 +42,11 @@ public class TimesService {
         times.setIdTime(savedTimes.getIdTime());
         times.setNome(timesPutRequestBody.getNome());
         timesRepository.save(times);
+    }
+
+    public void verificaTime(Times times){
+        if(timesRepository.existeTimeNome(times.getNome())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O time já existe");
+        }
     }
 }

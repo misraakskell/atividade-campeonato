@@ -21,5 +21,5 @@ public interface CampeonatoRepository extends JpaRepository<Campeonato, Integer>
                     "AND c.finalizado = TRUE")
     boolean campFinalizado(@Param("idCamp") int idCamp);
 
-    boolean verificaNomeAno(String nome, long ano);
+    boolean verificaNomeAno(String nome, int ano);
 }

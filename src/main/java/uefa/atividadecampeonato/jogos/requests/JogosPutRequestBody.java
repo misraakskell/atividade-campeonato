@@ -5,13 +5,16 @@ import lombok.Data;
 import uefa.atividadecampeonato.campeonato.domain.Campeonato;
 import uefa.atividadecampeonato.times.domain.Times;
 
+import java.util.Date;
+
 @Data
 @Builder
 public class JogosPutRequestBody {
     private int idJogo;
-    private Times timeMandante;
-    private Times timeVisitante;
-    private Campeonato campeonato;
-    private long golsMandante;
-    private long golsVisitante;
+    private int timeMandante;
+    private int timeVisitante;
+    private int campeonato;
+    private int golsMandante;
+    private int golsVisitante;
+    private Date dataJogo;
 }

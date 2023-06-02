@@ -1,5 +1,6 @@
 package uefa.atividadecampeonato.campeonato.service;
 
+import javafx.scene.control.Tab;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import uefa.atividadecampeonato.campeonato.repository.CampeonatoRepository;
 import uefa.atividadecampeonato.campeonato.requests.CampeonatoPutRequestBody;
 import uefa.atividadecampeonato.exception.BadRequestException;
 import uefa.atividadecampeonato.tabela.domain.Tabela;
+import uefa.atividadecampeonato.times.domain.Times;
 import uefa.atividadecampeonato.times.service.TimesService;
 
 import java.time.LocalDateTime;
@@ -45,11 +47,25 @@ public class CampeonatoService {
         campeonatoRepository.save(savedCampeonato);
     }
 
-    public void tabelaParaTime(CampeonatoPutRequestBody campeonatoPutRequestBody, Campeonato campeonato){
-        campeonatoPutRequestBody.getIdTimes().forEach(idTime -> {
-        });
-    }
+//    public void tabelaParaTime(CampeonatoPutRequestBody campeonatoPutRequestBody, Campeonato campeonato){
+//        campeonatoPutRequestBody.getIdTimes().forEach(idTime -> {
+//            Tabela tabela = criaTabela(campeonato, TimesService.findByIdOrThrowBadRequestException(idTime));
+//            tabelaRepository.save(tabela);
+//        });
+//    }
 
+    public Tabela criaTabela(Campeonato campeonato, Times times){
+        Tabela tabela = new Tabela();
+        tabela.setCampeonato(campeonato);
+        tabela.setTimes(times);
+        tabela.setPontuacao(0);
+        tabela.setQntdDeVitorias(0);
+        tabela.setQntdDeEmpates(0);
+        tabela.setQntdDeDerrotas(0);
+        tabela.setQntdDeGolsFeitos(0);
+        tabela.setQntdDeGolsSofridos(0);
+        return tabela;
+    }
 
 //        createTabelaPontForEachTime(dtoCampeonato, domainCampeonato);
 

@@ -21,7 +21,7 @@ public class Campeonato {
     private int idCamp;
 
     @NotNull
-    private long ano;
+    private int ano;
 
     @NotEmpty(message = "O campeonato precisa de um nome")
     private String nome;
