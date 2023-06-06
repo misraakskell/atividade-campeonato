@@ -14,5 +14,5 @@ import java.util.List;
 public class CampeonatoPutRequestBody {
 
     private int idCamp;
-    private List<Long> idTimes;
+    private List<Integer> idTimes;
 }

@@ -1,6 +1,7 @@
 package uefa.atividadecampeonato.times.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -12,10 +13,14 @@ import uefa.atividadecampeonato.times.requests.TimesPutRequestBody;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class TimesService {
 
     private final TimesRepository timesRepository;
+
+    @Autowired
+    public TimesService(TimesRepository timesRepository) {
+        this.timesRepository = timesRepository;
+    }
 
     public List<Times> listAll(){
         return timesRepository.findAll();
@@ -45,7 +50,7 @@ public class TimesService {
     }
 
     public void verificaTime(Times times){
-        if(timesRepository.existeTimeNome(times.getNome())){
+        if(timesRepository.findByNome(times.getNome())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O time já existe");
         }
     }

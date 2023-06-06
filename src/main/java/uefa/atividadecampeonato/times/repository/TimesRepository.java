@@ -5,5 +5,5 @@ import uefa.atividadecampeonato.times.domain.Times;
 
 public interface TimesRepository extends JpaRepository<Times, Integer> {
 
-    boolean existeTimeNome(String nome);
+    boolean findByNome(String nome);
 }

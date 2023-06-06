@@ -26,8 +26,6 @@ public class Campeonato {
     @NotEmpty(message = "O campeonato precisa de um nome")
     private String nome;
 
-    private boolean iniciado; //se não finalizado
-
-    private boolean finalizado; //se não amistoso
-
+    private boolean iniciado = false;
+    private boolean finalizado = false;
 }

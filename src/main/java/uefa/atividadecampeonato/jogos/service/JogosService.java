@@ -4,13 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import uefa.atividadecampeonato.campeonato.domain.Campeonato;
 import uefa.atividadecampeonato.campeonato.repository.CampeonatoRepository;
+import uefa.atividadecampeonato.campeonato.service.CampeonatoService;
 import uefa.atividadecampeonato.exception.BadRequestException;
 import uefa.atividadecampeonato.jogos.domain.Jogos;
 import uefa.atividadecampeonato.jogos.repository.JogosRepository;
 import uefa.atividadecampeonato.jogos.requests.JogosPutRequestBody;
-import uefa.atividadecampeonato.tabela.domain.Tabela;
 import uefa.atividadecampeonato.tabela.repository.TabelaRepository;
 
 import java.util.List;
@@ -22,6 +21,7 @@ public class JogosService {
     private final JogosRepository jogosRepository;
     private final TabelaRepository tabelaRepository;
     private final CampeonatoRepository campeonatoRepository;
+    private final CampeonatoService campeonatoService;
 
     public List<Jogos> listAll() {
         return jogosRepository.findAll();
@@ -51,6 +51,18 @@ public class JogosService {
         jogosRepository.save(savedJogos);
     }
 
+    public void verificaInicioJogo(JogosPutRequestBody jogosPutRequestBody){ //necessario a mesma validação? igual do camp?
+        inicioCamp(jogosPutRequestBody);
+        verificaTimeCamp(jogosPutRequestBody);
+    }
+
+    public void inicioCamp(JogosPutRequestBody jogosPutRequestBody){
+        //campeonatoService.seNaoIniciadoOuFinalizado(jogosPutRequestBody.getCampeonato());
+        if(campeonatoRepository.findByIniciado(jogosPutRequestBody.getCampeonato()) == 0 || campeonatoRepository.findByFinalizado(jogosPutRequestBody.getCampeonato()) == 1){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O campeonato não foi iniciado ou já foi finalizado");
+        }
+    }
+
     public void verificaTimeCamp(JogosPutRequestBody jogosPutRequestBody){
         if(!(tabelaRepository.campPorTabela(jogosPutRequestBody.getCampeonato(), jogosPutRequestBody.getTimeMandante()))
             || !tabelaRepository.campPorTabela(jogosPutRequestBody.getCampeonato(), jogosPutRequestBody.getTimeVisitante())){
@@ -72,3 +84,12 @@ public class JogosService {
     }
 
 }
+
+//{
+//        "timeMandante": 1,
+//        "timeVisitante": 3,
+//        "campeonato": 13,
+//        "golsMandante": 0,
+//        "golsVisitante": 0,
+//        "dataJogo": "2023-05-10"
+//}
