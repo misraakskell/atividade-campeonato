@@ -95,7 +95,7 @@ public class CampeonatoService {
 
     public void verificaFinal(int id) {
         seNaoIniciadoOuFinalizado(id);
-        ////
+        verificaNumeroJogos(id);
     }
 
     public void verificaNovoCamp(Campeonato campeonato) {
@@ -165,5 +165,13 @@ public class CampeonatoService {
             }
         });
     }
+
+    public void verificaNumeroJogos(int id){
+        int partidas = tabelaRepository.qntdDeTimes(id) * (tabelaRepository.qntdDeTimes(id) - 1);
+        if(campeonatoRepository.numeroJogos(id) != partidas){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Os times precisam ter jogados no minimo duas vezes");
+        }
+    }
+
 
 }

@@ -24,7 +24,7 @@ public interface TabelaRepository extends JpaRepository<Tabela, Integer> {
     boolean campPorTabela(@Param("campeonato")int campeonato, @Param("times")int times);
 
     @Query(nativeQuery = true,
-            value = "SELECT COUNT(*) > 0 " +
+            value = "SELECT COUNT(*) " +
                     "FROM tabela t " +
                         "WHERE id_camp = :campeonato")
     int qntdDeTimes(@Param("campeonato")int campeonato);

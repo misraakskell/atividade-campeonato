@@ -12,6 +12,7 @@ import uefa.atividadecampeonato.jogos.repository.JogosRepository;
 import uefa.atividadecampeonato.jogos.requests.JogosPutRequestBody;
 import uefa.atividadecampeonato.tabela.repository.TabelaRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,6 +34,7 @@ public class JogosService {
     }
 
     public Jogos save(Jogos jogos) {
+
         return jogosRepository.save(jogos);
     }
 
@@ -54,6 +56,12 @@ public class JogosService {
     public void verificaInicioJogo(JogosPutRequestBody jogosPutRequestBody){ //necessario a mesma validação? igual do camp?
         inicioCamp(jogosPutRequestBody);
         verificaTimeCamp(jogosPutRequestBody);
+    }
+
+    public void jogoNovo(JogosPutRequestBody jogosPutRequestBody){
+        dataDisponivel(jogosPutRequestBody);
+        timeRepetido(jogosPutRequestBody);
+        timeDisponivel(jogosPutRequestBody);
     }
 
     public void inicioCamp(JogosPutRequestBody jogosPutRequestBody){
@@ -80,6 +88,20 @@ public class JogosService {
     public void timeRepetido(JogosPutRequestBody jogosPutRequestBody){
         if(jogosPutRequestBody.getTimeMandante() == jogosPutRequestBody.getTimeVisitante()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Um time não pode jogar com ele mesmo");
+        }
+    }
+
+    public void timeDisponivel(JogosPutRequestBody jogosPutRequestBody){
+        if(jogosRepository.jogoPorData(jogosPutRequestBody.getDataJogo(), jogosPutRequestBody.getTimeMandante(),
+                jogosPutRequestBody.getTimeVisitante())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Um dos times já possui jogo no mesmo dia");
+        }
+    }
+
+    public void dataDisponivel(JogosPutRequestBody jogosPutRequestBody){
+        Date dataEscolhida = new Date();
+        if(jogosPutRequestBody.getDataJogo().compareTo(dataEscolhida) < 0){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A data tem que ser superior a de hoje");
         }
     }
 

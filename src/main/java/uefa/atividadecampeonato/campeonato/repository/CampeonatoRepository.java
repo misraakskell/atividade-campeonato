@@ -22,4 +22,11 @@ public interface CampeonatoRepository extends JpaRepository<Campeonato, Integer>
     int findByFinalizado(@Param("idCamp") int idCamp);
 
     boolean existsByNomeAndAno(String nome, int ano);
+
+    @Query(nativeQuery = true,
+            value = "SELECT COUNT(*) " +
+                    "FROM jogos j " +
+                    "WHERE campeonato = :idCamp")
+    int numeroJogos(@Param("idCamp")int idCamp);
+
 }
