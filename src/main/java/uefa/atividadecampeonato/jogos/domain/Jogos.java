@@ -19,11 +19,24 @@ import java.util.Date;
 public class Jogos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_jogo")
     private int idJogo;
+
+    @Column(name = "time_mandante")
     private int timeMandante;
+
+    @Column(name = "time_visitante")
     private int timeVisitante;
+
+    @Column(name = "campeonato")
     private int campeonato;
+
+    @Column(name = "gols_mandante")
     private long golsMandante;
+
+    @Column(name = "gols_visitante")
     private long golsVisitante;
+
+    @Column(name = "data_jogo")
     private Date dataJogo;
 }

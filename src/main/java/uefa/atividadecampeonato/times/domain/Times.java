@@ -18,9 +18,11 @@ public class Times {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_time")
     private int idTime;
 
     @NotEmpty(message = "O time precisa de um nome")
+    @Column(name = "nome")
     private String nome;
 
 }

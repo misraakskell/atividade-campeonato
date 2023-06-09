@@ -31,8 +31,8 @@ public class JogosController {
     }
 
     @PostMapping
-    public ResponseEntity<Jogos> save(@RequestBody @Valid Jogos jogos) {
-        return new ResponseEntity<>(jogosService.save(jogos), HttpStatus.CREATED);
+    public ResponseEntity<Jogos> save(@RequestBody @Valid JogosPutRequestBody jogosPutRequestBody) {
+        return new ResponseEntity<>(jogosService.save(jogosPutRequestBody), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")

@@ -49,13 +49,13 @@ public class CampeonatoController {
     }
 
     @PutMapping(path = "/{id}/inicia")
-    public ResponseEntity<Objects> iniciaCamp(@PathVariable("id") int id, @RequestBody CampeonatoPutRequestBody campeonatoPutRequestBody) {
+    public ResponseEntity<Object> iniciaCamp(@PathVariable("id") int id, @RequestBody CampeonatoPutRequestBody campeonatoPutRequestBody) {
         campeonatoService.inicia(campeonatoPutRequestBody);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}/finaliza")
-    public ResponseEntity<Objects> finalizaCamp(@PathVariable("id") int id) {
+    public ResponseEntity<Object> finalizaCamp(@PathVariable("id") int id) {
         campeonatoService.finaliza(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

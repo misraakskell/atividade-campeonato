@@ -14,24 +14,24 @@ public interface JogosRepository extends JpaRepository<Jogos, Integer> {
     @Query(nativeQuery = true,
             value = "SELECT COUNT(*) > 0 " +
                     "FROM jogos j " +
-                        "WHERE j.id_campeonato = :campeonato " +
-                        "AND j.id_mandante = :timeMandante " +
-                        "AND j.id_visitante = :timeVisitante")
-    boolean jogoExiste(@Param("campeonato")int campeonato, @Param("timeMandante")int timeMandante,
+                        "WHERE j.campeonato = :campeonato " +
+                        "AND j.time_mandante = :timeMandante " +
+                        "AND j.time_visitante = :timeVisitante")
+    int jogoExiste(@Param("campeonato")int campeonato, @Param("timeMandante")int timeMandante,
                        @Param("timeVisitante")int timeVisitante);
 
     @Query(nativeQuery = true,
             value = "SELECT COUNT(*) > 0 " +
                     "FROM jogos j " +
                         "WHERE j.data_jogo = :dataJogo " +
-                        "AND j.id_mandante = :timeMandante " +
+                        "AND j.time_mandante = :timeMandante " +
                         "OR j.data_jogo = :dataJogo " +
-                        "AND j.id_visitante = :timeVisitante " +
+                        "AND j.time_visitante = :timeVisitante " +
                         "OR j.data_jogo = :dataJogo " +
-                        "AND j.id_visitante = :timeVisitante " +
+                        "AND j.time_visitante = :timeVisitante " +
                         "OR j.data_jogo = :dataJogo " +
-                        "AND j.id_mandante = :timeMandante")
-    boolean jogoPorData(@Param("dataJogo")Date dataJogo, @Param("timeMandante")int timeMandante,
+                        "AND j.time_mandante = :timeMandante")
+    int jogoPorData(@Param("dataJogo")Date dataJogo, @Param("timeMandante")int timeMandante,
                         @Param("timeVisitante")int timeVisitante); //testar
 }
 
