@@ -14,7 +14,7 @@ public interface JogosRepository extends JpaRepository<Jogos, Integer> {
     @Query(nativeQuery = true,
             value = "SELECT COUNT(*) > 0 " +
                     "FROM jogos j " +
-                        "WHERE j.campeonato = :campeonato " +
+                        "WHERE j.campeonato_id = :campeonato " +
                         "AND j.time_mandante = :timeMandante " +
                         "AND j.time_visitante = :timeVisitante")
     int jogoExiste(@Param("campeonato")int campeonato, @Param("timeMandante")int timeMandante,
@@ -32,7 +32,14 @@ public interface JogosRepository extends JpaRepository<Jogos, Integer> {
                         "OR j.data_jogo = :dataJogo " +
                         "AND j.time_mandante = :timeMandante")
     int jogoPorData(@Param("dataJogo")Date dataJogo, @Param("timeMandante")int timeMandante,
-                        @Param("timeVisitante")int timeVisitante); //testar
+                        @Param("timeVisitante")int timeVisitante);
+
+//    @Query(nativeQuery = true,
+//            value = "SELECT COUNT(*) > 0 " +
+//                    "FROM jogos j " +
+//                        "WHERE j.campeonato_id = null " +
+//                        "AND j.id_jogo = :id_jogo")
+//    int procuraAmistoso(@Param("campeonato")int campeonato);
 }
 
 

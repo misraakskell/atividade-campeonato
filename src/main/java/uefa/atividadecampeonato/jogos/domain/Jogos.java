@@ -28,8 +28,9 @@ public class Jogos {
     @Column(name = "time_visitante")
     private int timeVisitante;
 
-    @Column(name = "campeonato")
-    private int campeonato;
+    @ManyToOne
+    @JoinColumn(name = "campeonato_id") //amistoso tem que ser null
+    private Campeonato campeonato;
 
     @Column(name = "gols_mandante")
     private long golsMandante;

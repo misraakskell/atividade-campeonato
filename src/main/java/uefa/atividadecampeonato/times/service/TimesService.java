@@ -32,9 +32,8 @@ public class TimesService {
     }
 
     public Times save(Times times) {
-        Times novoTime = new Times();
-        novoTime.setNome(times.getNome());
-        return timesRepository.save(novoTime);
+        verificaTime(times);
+        return timesRepository.save(times);
     }
 
     public void delete(int id) {
@@ -50,7 +49,7 @@ public class TimesService {
     }
 
     public void verificaTime(Times times){
-        if(timesRepository.findByNome(times.getNome())){
+        if(timesRepository.findByNome(times.getNome()) == 0){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O time já existe");
         }
     }

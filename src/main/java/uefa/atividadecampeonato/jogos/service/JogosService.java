@@ -49,8 +49,10 @@ public class JogosService {
         jogoSaved.setGolsMandante(jogosPutRequestBody.getGolsMandante());
         jogoSaved.setGolsVisitante(jogosPutRequestBody.getGolsVisitante());
         jogoSaved.setDataJogo(jogosPutRequestBody.getDataJogo());
-        jogoSaved.setCampeonato(jogosPutRequestBody.getCampeonato());
-        vencedor(jogosPutRequestBody);
+        if (jogosPutRequestBody.getCampeonato() != 0 && Objects.nonNull(jogosPutRequestBody.getCampeonato())){
+            jogoSaved.setCampeonato(this.campeonatoRepository.findById(jogosPutRequestBody.getCampeonato()).get());
+            vencedor(jogosPutRequestBody);
+        }
         return jogosRepository.save(jogoSaved);
     }
 
@@ -65,7 +67,7 @@ public class JogosService {
         savedJogos.setTimeVisitante(jogosPutRequestBody.getTimeVisitante());
         savedJogos.setGolsMandante(jogosPutRequestBody.getGolsMandante());
         savedJogos.setGolsVisitante(jogosPutRequestBody.getGolsVisitante());
-        savedJogos.setCampeonato(jogosPutRequestBody.getCampeonato());
+        savedJogos.setCampeonato(this.campeonatoRepository.findById(jogosPutRequestBody.getCampeonato()).get());
         jogosRepository.save(savedJogos);
     }
 
@@ -75,7 +77,7 @@ public class JogosService {
     }
 
     public void jogoNovo(JogosPutRequestBody jogosPutRequestBody){
-        if(Objects.nonNull(jogosPutRequestBody.getCampeonato())){
+        if(Objects.nonNull(jogosPutRequestBody.getCampeonato()) && jogosPutRequestBody.getCampeonato() != 0){
             verificaInicioJogo(jogosPutRequestBody);
             jogoExiste(jogosPutRequestBody);
         }
@@ -85,7 +87,6 @@ public class JogosService {
     }
 
     public void inicioCamp(JogosPutRequestBody jogosPutRequestBody){
-        //campeonatoService.seNaoIniciadoOuFinalizado(jogosPutRequestBody.getCampeonato());
         if(campeonatoRepository.findByIniciado(jogosPutRequestBody.getCampeonato()) == 0 || campeonatoRepository.findByFinalizado(jogosPutRequestBody.getCampeonato()) == 1){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O campeonato não foi iniciado ou já foi finalizado");
         }
@@ -101,7 +102,7 @@ public class JogosService {
     public void jogoExiste(JogosPutRequestBody jogosPutRequestBody){
         if(jogosRepository.jogoExiste(jogosPutRequestBody.getCampeonato(), jogosPutRequestBody.getTimeMandante(),
                 jogosPutRequestBody.getTimeVisitante()) == 1){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Um dos times já jogou como mandante");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Neste confronto, um dos times já foi mandante/visitante");
         }
     }
 
@@ -120,6 +121,7 @@ public class JogosService {
 
     public void dataDisponivel(JogosPutRequestBody jogosPutRequestBody){
         Date dataEscolhida = new Date();
+
         if(jogosPutRequestBody.getDataJogo().compareTo(dataEscolhida) < 0){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A data tem que ser superior a de hoje");
         }
@@ -194,12 +196,17 @@ public class JogosService {
     public void vencedor(JogosPutRequestBody jogosPutRequestBody){
         if(jogosPutRequestBody.getGolsMandante() > jogosPutRequestBody.getGolsVisitante()){
             vitoriaMandante(jogosPutRequestBody);
+            System.out.println("O time mandante venceu!");
         } else if (jogosPutRequestBody.getGolsMandante() == jogosPutRequestBody.getGolsVisitante()) {
             empate(jogosPutRequestBody);
+            System.out.println("Houve um empate!");
         } else {
             vitoriaVisitante(jogosPutRequestBody);
+            System.out.println("O time visitante venceu!"); //escrito no terminal
         }
     }
+
+
 }
 
 //{

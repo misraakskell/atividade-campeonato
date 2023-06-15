@@ -26,7 +26,7 @@ public interface CampeonatoRepository extends JpaRepository<Campeonato, Integer>
     @Query(nativeQuery = true,
             value = "SELECT COUNT(*) " +
                     "FROM jogos j " +
-                    "WHERE campeonato = :idCamp")
+                    "WHERE campeonato_id = :idCamp")
     int numeroJogos(@Param("idCamp")int idCamp);
 
 }

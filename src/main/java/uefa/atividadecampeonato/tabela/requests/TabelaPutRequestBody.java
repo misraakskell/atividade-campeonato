@@ -14,6 +14,7 @@ public class TabelaPutRequestBody {
     private long pontuacao;
     private long qntdDeVitorias;
     private long qntdDeDerrotas;
+    private long qntdDeEmpates;//
     private long qntdDeGolsFeitos;
     private long qntdDeGolsSofridos;
 }

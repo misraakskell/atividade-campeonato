@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import uefa.atividadecampeonato.campeonato.domain.Campeonato;
 import uefa.atividadecampeonato.campeonato.requests.CampeonatoPutRequestBody;
 import uefa.atividadecampeonato.campeonato.service.CampeonatoService;
+import uefa.atividadecampeonato.jogos.service.JogosService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.Objects;
 public class CampeonatoController {
 
     private final CampeonatoService campeonatoService;
+    private final JogosService jogosService;
 
     @GetMapping
     public ResponseEntity<List<Campeonato>> list() {

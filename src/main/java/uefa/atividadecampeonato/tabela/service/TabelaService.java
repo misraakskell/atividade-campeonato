@@ -40,6 +40,7 @@ public class TabelaService {
         savedTabela.setPontuacao(tabelaPutRequestBody.getPontuacao());
         savedTabela.setQntdDeVitorias(tabelaPutRequestBody.getQntdDeVitorias());
         savedTabela.setQntdDeDerrotas(tabelaPutRequestBody.getQntdDeDerrotas());
+        savedTabela.setQntdDeEmpates(tabelaPutRequestBody.getQntdDeEmpates());
         savedTabela.setQntdDeGolsFeitos(tabelaPutRequestBody.getQntdDeGolsFeitos());
         savedTabela.setQntdDeGolsSofridos(tabelaPutRequestBody.getQntdDeGolsSofridos());
         tabelaRepository.save(savedTabela);
