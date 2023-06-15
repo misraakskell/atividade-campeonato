@@ -50,7 +50,7 @@ public class TimesService {
 
     public void verificaTime(Times times){
         if(timesRepository.findByNome(times.getNome()) == 0){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O time já existe");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O time já existe!");
         }
     }
 }
